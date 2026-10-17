@@ -1,0 +1,11 @@
+app_domain(xiaomiparts_app)
+typeattribute xiaomiparts_app mlstrustedsubject;
+
+# Platform-signed system-UID app: preferences, Settings integration, sensors,
+# audio playback, notifications, and foreground-app thermal profiles.
+allow xiaomiparts_app system_app_data_file:dir create_dir_perms;
+allow xiaomiparts_app system_app_data_file:{ file lnk_file } create_file_perms;
+allow xiaomiparts_app { app_api_service system_api_service }:service_manager find;
+
+# Only XiaomiParts' own control properties may be changed by this domain.
+set_prop(xiaomiparts_app, xiaomiparts_prop)

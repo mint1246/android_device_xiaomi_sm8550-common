@@ -1,0 +1,4 @@
+# CPU/GPU controls are applied by system init from init.xiaomiparts.rc.
+persist.sys.parts.         u:object_r:xiaomiparts_prop:s0 prefix
+sys.perf_mode_active       u:object_r:xiaomiparts_prop:s0 exact int
+sys.thermal.controlled_by  u:object_r:xiaomiparts_prop:s0 exact enum powertools perapp

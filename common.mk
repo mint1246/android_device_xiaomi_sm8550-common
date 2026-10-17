@@ -144,6 +144,10 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_PACKAGES += \
     XiaomiEsimSwitcher
 
+# Xiaomi device settings
+PRODUCT_PACKAGES += \
+    XiaomiParts
+
 # Fingerprint
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint-service.xiaomi \

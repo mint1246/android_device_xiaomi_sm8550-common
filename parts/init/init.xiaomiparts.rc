@@ -1,0 +1,47 @@
+# XiaomiParts runs with the system UID. Keep access limited to its controls.
+on boot
+    chown system system /sys/class/touch/touch_dev/grip_rejection
+    chmod 0660 /sys/class/touch/touch_dev/grip_rejection
+    chown system system /sys/class/touch/touch_dev/panel_orientation
+    chmod 0660 /sys/class/touch/touch_dev/panel_orientation
+    chown system system /sys/class/power_supply/battery/constant_charge_current
+    chmod 0660 /sys/class/power_supply/battery/constant_charge_current
+    chown system system /sys/class/qcom-battery/fastchg_mode
+    chmod 0640 /sys/class/qcom-battery/fastchg_mode
+    chown system system /sys/class/backlight/panel0-backlight/brightness
+    chmod 0664 /sys/class/backlight/panel0-backlight/brightness
+
+# Apply CPU/GPU settings through init instead of granting the app direct access.
+on property:persist.sys.parts.gpu.min_frequency=*
+    write /sys/class/kgsl/kgsl-3d0/devfreq/min_freq ${persist.sys.parts.gpu.min_frequency}
+
+on property:persist.sys.parts.gpu.max_frequency=*
+    write /sys/class/kgsl/kgsl-3d0/devfreq/max_freq ${persist.sys.parts.gpu.max_frequency}
+
+# These properties are set separately, after the Hz values in GPUUtils.
+on property:persist.sys.parts.gpu.min_clock=*
+    write /sys/class/kgsl/kgsl-3d0/min_clock_mhz ${persist.sys.parts.gpu.min_clock}
+
+on property:persist.sys.parts.gpu.max_clock=*
+    write /sys/class/kgsl/kgsl-3d0/max_clock_mhz ${persist.sys.parts.gpu.max_clock}
+
+on property:persist.sys.parts.cpu.little.min_frequency=*
+    write /sys/devices/system/cpu/cpufreq/policy0/scaling_min_freq ${persist.sys.parts.cpu.little.min_frequency}
+on property:persist.sys.parts.cpu.little.max_frequency=*
+    write /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq ${persist.sys.parts.cpu.little.max_frequency}
+on property:persist.sys.parts.cpu.little.governor=*
+    write /sys/devices/system/cpu/cpufreq/policy0/scaling_governor ${persist.sys.parts.cpu.little.governor}
+
+on property:persist.sys.parts.cpu.big.min_frequency=*
+    write /sys/devices/system/cpu/cpufreq/policy3/scaling_min_freq ${persist.sys.parts.cpu.big.min_frequency}
+on property:persist.sys.parts.cpu.big.max_frequency=*
+    write /sys/devices/system/cpu/cpufreq/policy3/scaling_max_freq ${persist.sys.parts.cpu.big.max_frequency}
+on property:persist.sys.parts.cpu.big.governor=*
+    write /sys/devices/system/cpu/cpufreq/policy3/scaling_governor ${persist.sys.parts.cpu.big.governor}
+
+on property:persist.sys.parts.cpu.prime.min_frequency=*
+    write /sys/devices/system/cpu/cpufreq/policy7/scaling_min_freq ${persist.sys.parts.cpu.prime.min_frequency}
+on property:persist.sys.parts.cpu.prime.max_frequency=*
+    write /sys/devices/system/cpu/cpufreq/policy7/scaling_max_freq ${persist.sys.parts.cpu.prime.max_frequency}
+on property:persist.sys.parts.cpu.prime.governor=*
+    write /sys/devices/system/cpu/cpufreq/policy7/scaling_governor ${persist.sys.parts.cpu.prime.governor}

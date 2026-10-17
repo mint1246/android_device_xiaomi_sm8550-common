@@ -1,0 +1,17 @@
+# Per-app thermal profiles and the global power profile use thermal_message.
+allow xiaomiparts_app sysfs_thermal:dir search;
+allow xiaomiparts_app sysfs_thermal:lnk_file r_file_perms;
+allow xiaomiparts_app sysfs_thermal:file rw_file_perms;
+
+# Manual and ambient-light-driven panel brightness.
+allow xiaomiparts_app vendor_sysfs_graphics:dir search;
+allow xiaomiparts_app vendor_sysfs_graphics:lnk_file r_file_perms;
+allow xiaomiparts_app vendor_sysfs_graphics:file rw_file_perms;
+
+# HyperCharge detection and the requested battery charge-current limit.
+allow xiaomiparts_app vendor_sysfs_battery_supply:dir search;
+allow xiaomiparts_app vendor_sysfs_battery_supply:lnk_file r_file_perms;
+allow xiaomiparts_app vendor_sysfs_battery_supply:file rw_file_perms;
+
+# Only the two edge-rejection controls get this device-specific label.
+allow xiaomiparts_app vendor_sysfs_xiaomiparts_touch:file rw_file_perms;

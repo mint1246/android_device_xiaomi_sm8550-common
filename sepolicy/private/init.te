@@ -1,0 +1,4 @@
+# XiaomiParts CPU controls are applied by system init, not by the app itself.
+allow init sysfs_devices_system_cpu:dir search;
+allow init sysfs_devices_system_cpu:lnk_file r_file_perms;
+allow init sysfs_devices_system_cpu:file w_file_perms;
